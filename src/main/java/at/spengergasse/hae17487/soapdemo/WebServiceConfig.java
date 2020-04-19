@@ -23,13 +23,17 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean(servlet, "/ws/*");
     }
 
-    @Bean(name = "countries")
-    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {
+    /**
+     * Used to generate the WSDL file accessible at <a href="http://localhost:8080/ws/demo.wsdl">http://localhost:8080/ws/demo.wsdl</a>.
+     * @param schema the schema to be used by the WSDL file
+     */
+    @Bean(name = "demo")
+    public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema schema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-        wsdl11Definition.setPortTypeName("CountriesPort");
+        wsdl11Definition.setPortTypeName("DemoPort");
         wsdl11Definition.setLocationUri("/ws");
         wsdl11Definition.setTargetNamespace("http://spengergasse.at/hae17487/soapdemo/schema");
-        wsdl11Definition.setSchema(countriesSchema);
+        wsdl11Definition.setSchema(schema);
         return wsdl11Definition;
     }
 
